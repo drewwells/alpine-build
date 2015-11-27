@@ -1,5 +1,15 @@
-FROM gliderlabs/alpine:latest
+FROM gliderlabs/alpine:edge
 
 # install g++
-RUN apk --update add build-base pkgconf autoconf automake libtool git file mercurial
-RUN curl -LsO https://circle-artifacts.com/gh/andyshinn/alpine-pkg-go/3/artifacts/0/home/ubuntu/alpine-pkg-go/packages/x86_64/go-1.4.2-r0.apk && apk --allow-untrusted add --update go-1.4.2-r0.apk
+RUN apk --update add git mercurial go g++
+# RUN apk --update add build-base pkgconf autoconf automake libtool git file mercurial go
+
+ENV GO15VENDOREXPERIMENT 1
+ENV GOPATH /usr
+ENV GOROOT /usr/lib/go
+#RUN go version
+
+#COPY . /usr/src/github.com/wellington/wellington
+#WORKDIR /usr/src/github.com/wellington/wellington
+
+#RUN go install -ldflags "-X github.com/wellington/wellington/version.Version=$(cat version.txt)" github.com/wellington/wellington/wt
